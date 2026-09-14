@@ -16,5 +16,15 @@ class Settings(BaseSettings):
         / "iris"
         / "iris.onnx"
     )
+    IRIS_MEAN_PATH: Path = (
+        ARTIFACTS_DIR 
+        / "iris"
+        / "mean.npy"
+    )
+    IRIS_STD_PATH: Path = (
+        ARTIFACTS_DIR 
+        / "iris"
+        / "std.npy"
+    )
 
 settings = Settings()
