@@ -6,7 +6,7 @@ class IrisModel(BaseModel):
         self.session = session
 
     def predict(self, input_data : input_schema):
-        output = self.session.run(
+        logits = self.session.run(
                 ["output"],          # Output tensor name
 
                 {
@@ -14,4 +14,4 @@ class IrisModel(BaseModel):
                 }
             )
 
-        return output
+        return logits[0]
