@@ -1,6 +1,7 @@
-from models.iris.loader import load_model
-from models.iris.model import IrisModel
-from config.settings import settings
+
+from mini_mlopscourse_project.models.iris.loader import loader
+from mini_mlopscourse_project.models.iris.model import IrisModel
+from mini_mlopscourse_project.config.settings import settings
 
 
 class ModelFactory:
@@ -10,7 +11,7 @@ class ModelFactory:
 
         if name == "iris":
 
-            session = load_model(
+            session = loader(
                 settings.IRIS_MODEL_PATH
             )
 
