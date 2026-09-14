@@ -3,6 +3,7 @@ from pydantic_settings import BaseSettings
 
 
 class Settings(BaseSettings):
+    """Application settings and artifact paths used by the project."""
 
     # Project root
     BASE_DIR: Path = Path(__file__).resolve().parents[3]
@@ -12,19 +13,20 @@ class Settings(BaseSettings):
 
     # Iris model
     IRIS_MODEL_PATH: Path = (
-        ARTIFACTS_DIR 
+        ARTIFACTS_DIR
         / "iris"
         / "iris.onnx"
     )
     IRIS_MEAN_PATH: Path = (
-        ARTIFACTS_DIR 
+        ARTIFACTS_DIR
         / "iris"
         / "mean.npy"
     )
     IRIS_STD_PATH: Path = (
-        ARTIFACTS_DIR 
+        ARTIFACTS_DIR
         / "iris"
         / "std.npy"
     )
+
 
 settings = Settings()
