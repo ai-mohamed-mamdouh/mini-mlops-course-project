@@ -1,11 +1,8 @@
-from typing import Dict
-
 from fastapi import APIRouter, Request, Header
-from mini_mlopscourse_project.schemas.iris.input_schema import input_schema
-from mini_mlopscourse_project.schemas.iris.output_schema import output_schema
-from mini_mlopscourse_project.pipelines.iris.preprocessing import pre_processing
-from mini_mlopscourse_project.pipelines.iris.postprocessing import post_processing
 
+from mini_mlopscourse_project.services.iris.iris_service import IrisService
+from mini_mlopscourse_project.schemas.iris.input_schema import InputSchema
+from mini_mlopscourse_project.schemas.iris.output_schema import OutputSchema
 
 
 iris_router = APIRouter(
@@ -16,17 +13,15 @@ iris_router = APIRouter(
 
 @iris_router.post("/iris/predict")
 def predict(
-    data: input_schema,
+    input_data: InputSchema,
     request: Request,
-    x: int = Header()
-)->output_schema:
-    print(x)
-    iris_model = request.app.state.iris_model
+    # x: int = Header()
+)->OutputSchema:
+    
+    output = IrisService(
+        iris_model=request.app.state.iris_model,
+        iris_processor=request.app.state.iris_processor
+        ).run_iris_service(input_data=input_data)
 
-    input_data = pre_processing(input_data=data)
-    logits = iris_model.predict(input_data=input_data)
-
-    output = post_processing(logits=logits)
 
     return output
-

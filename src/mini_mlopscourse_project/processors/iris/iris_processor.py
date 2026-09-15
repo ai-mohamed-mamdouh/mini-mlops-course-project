@@ -16,7 +16,7 @@ class IrisProcessor:
     def pre_processing(
         self,
         input_data: InputSchema
-    ) -> np.ndarray:
+    ) -> InputSchema:
         """
         Normalize Iris features using training statistics.
         """
@@ -28,7 +28,7 @@ class IrisProcessor:
 
         features = (features - self.mean) / self.std
 
-        return features
+        return InputSchema(features=features)
 
 
     @staticmethod

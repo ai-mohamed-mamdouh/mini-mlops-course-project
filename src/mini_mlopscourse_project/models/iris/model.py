@@ -1,5 +1,5 @@
 from mini_mlopscourse_project.models.base import BaseModel
-from mini_mlopscourse_project.schemas.iris.input_schema import input_schema
+from mini_mlopscourse_project.schemas.iris.input_schema import InputSchema
 
 
 class IrisModel(BaseModel):
@@ -9,7 +9,7 @@ class IrisModel(BaseModel):
         """Store the ONNX inference session used by the model."""
         self.session = session
 
-    def predict(self, input_data: input_schema):
+    def predict(self, input_data: InputSchema):
         """Run inference for a feature vector and return the model logits."""
         
         logits = self.session.run(
