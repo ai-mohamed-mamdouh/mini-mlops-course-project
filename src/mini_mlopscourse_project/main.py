@@ -21,7 +21,8 @@ async def lifespan(app: FastAPI):
 
 app = FastAPI(
     title="ML Inference API",
-    lifespan=lifespan
+    lifespan=lifespan, 
+    
 )
 
 app.include_router(iris_router)
