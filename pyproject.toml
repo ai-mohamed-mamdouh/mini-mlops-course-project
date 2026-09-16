@@ -5,12 +5,14 @@ description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
+    "anyio>=4.15.1",
     "fastapi>=0.141.1",
     "numpy>=2.5.3",
     "onnxruntime>=1.30.0",
     "pydantic>=2.13.5",
     "pydantic-settings>=2.15.0",
     "pylance>=11.0.0",
+    "starlette>=1.6.0",
     "uvicorn>=0.53.0",
 ]
 
@@ -27,4 +29,9 @@ dev = [
     "httpx2>=2.13.0",
     "pytest>=9.1.1",
     "pytest-asyncio>=1.4.0",
+]
+
+[tool.pytest.ini_options]
+filterwarnings = [
+    "ignore:The anyio.abc.BlockingPortal alias is deprecated:DeprecationWarning"
 ]
