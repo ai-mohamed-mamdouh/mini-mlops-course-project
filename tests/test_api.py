@@ -16,9 +16,19 @@ def test_iris_prediction():
             }
         )
 
-        assert response.status_code == 200
+    # Assert status code
+    assert response.status_code == 200
 
-        body = response.json()
+    # Assert response structure
+    body = response.json()
 
-        assert "preds" in body
-        assert "proba" in body
+    assert "preds" in body
+    assert "proba" in body
+
+    # Assert output format
+    assert isinstance(body["preds"], list)
+    assert isinstance(body["proba"], list)
+
+    assert len(body["preds"]) == 1
+    assert len(body["proba"]) == 1
+    assert len(body["proba"][0]) == 3
