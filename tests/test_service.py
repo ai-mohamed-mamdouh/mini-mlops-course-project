@@ -4,7 +4,7 @@ from mini_mlopscourse_project.processors.iris.iris_processor import IrisProcesso
 from mini_mlopscourse_project.schemas.iris.input_schema import InputSchema
 from mini_mlopscourse_project.schemas.iris.output_schema import OutputSchema
 
-def test_service() :
+def test_iris_service() :
     input_data = InputSchema(features=[ [1,2,3,4] ])
 
     result = IrisService(

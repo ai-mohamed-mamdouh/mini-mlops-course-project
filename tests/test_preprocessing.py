@@ -2,7 +2,7 @@ from mini_mlopscourse_project.schemas.iris.input_schema import InputSchema
 from mini_mlopscourse_project.processors.iris.iris_processor import IrisProcessor
 
 
-def test_preprocessing():
+def test_iris_preprocessing():
 
     # Arrange
     input_data = InputSchema(

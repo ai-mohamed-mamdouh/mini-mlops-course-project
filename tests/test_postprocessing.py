@@ -4,7 +4,7 @@ from mini_mlopscourse_project.processors.iris.iris_processor import IrisProcesso
 from mini_mlopscourse_project.schemas.iris.output_schema import OutputSchema
 
 
-def test_postprocessing():
+def test_iris_postprocessing():
 
     # Arrange
     logits = np.array([
