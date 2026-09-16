@@ -1,0 +1,15 @@
+services:
+  ml-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+
+    container_name: iris-ml-api
+
+    ports:
+      - "8000:8000"
+
+    volumes:
+      - ./artifacts:/app/artifacts
+
+    restart: unless-stopped
