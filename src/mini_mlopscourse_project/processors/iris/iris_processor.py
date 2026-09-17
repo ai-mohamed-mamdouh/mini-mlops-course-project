@@ -34,9 +34,9 @@ class IrisProcessor:
     @staticmethod
     def post_processing(
         logits: np.ndarray
-    ) -> OutputSchema:
+    ) -> list[OutputSchema]:
         """
-        Convert logits into predictions and probabilities.
+        Convert batch logits into individual responses.
         """
 
         exp_x = np.exp(
@@ -54,7 +54,18 @@ class IrisProcessor:
             axis=1
         )
 
-        return OutputSchema(
-            preds=preds.tolist(),
-            proba=proba.tolist()
-        )
+
+        results = []
+
+        for pred, prob in zip(
+            preds,
+            proba
+        ):
+            results.append(
+                OutputSchema(
+                    preds=[int(pred)],
+                    proba=[prob.tolist()]
+                )
+            )
+
+        return results
