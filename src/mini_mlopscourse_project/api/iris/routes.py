@@ -1,6 +1,4 @@
 from fastapi import APIRouter, Request, Header
-
-from mini_mlopscourse_project.services import IrisService
 from mini_mlopscourse_project.schemas.iris.input_schema import InputSchema
 from mini_mlopscourse_project.schemas.iris.output_schema import OutputSchema
 

@@ -1,1 +1,0 @@
-from .iris.iris_service import IrisService

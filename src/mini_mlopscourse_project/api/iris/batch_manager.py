@@ -1,19 +1,16 @@
 import asyncio
 from mini_mlopscourse_project.schemas.iris.input_schema import InputSchema
-
+from mini_mlopscourse_project.services.iris.iris_service import IrisService
 
 class BatchManager:
 
     def __init__(
         self,
-        model,
-        processor,
+        iris_service: IrisService,
         max_batch_size=10,
         timeout=0.01
     ):
-
-        self.model = model
-        self.processor = processor
+        self.iris_service = iris_service
 
         self.max_batch_size = max_batch_size
         self.timeout = timeout
@@ -83,21 +80,7 @@ class BatchManager:
             batch_input = InputSchema(
                 features=batch_features
             )
-
-
-            batch_input = self.processor.pre_processing( batch_input )
-
-            # ONE model call
-            outputs = self.model.predict(
-                batch_input
-            )
-
-
-            # convert model output
-            results = self.processor.post_processing(
-                outputs
-            )
-
+            results = self.iris_service.run_iris_service(batch_input)
 
             # return each result
             for future, result in zip(

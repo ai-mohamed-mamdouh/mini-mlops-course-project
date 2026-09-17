@@ -1,22 +1,25 @@
-from fastapi import FastAPI
 import asyncio
+from fastapi import FastAPI
 from contextlib import asynccontextmanager
-from mini_mlopscourse_project.api.iris.batch_manager import BatchManager
 from mini_mlopscourse_project.api.iris.routes import iris_router
 from mini_mlopscourse_project.models.factory import ModelFactory
+from mini_mlopscourse_project.services.iris.iris_service import IrisService
+from mini_mlopscourse_project.api.iris.batch_manager import BatchManager
 from mini_mlopscourse_project.processors.iris.iris_processor import IrisProcessor
-
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     # Load model once when application starts
-    print("Loading model...")
-
     # Load model once
     model = ModelFactory.create("iris")
     processor = IrisProcessor()
-    batch_manager = BatchManager(model = model
-                                 ,processor=processor)
+
+    iris_service = IrisService(
+        iris_model=model,
+        iris_processor=processor
+    )
+
+    batch_manager = BatchManager(iris_service=iris_service)
     app.state.batch_manager = batch_manager
 
     asyncio.create_task(
@@ -26,7 +29,7 @@ async def lifespan(app: FastAPI):
     yield
 
     # Cleanup if needed
-    app.state.iris_model = None
+    app.state.batch_manager = None
     print("Shutdown...")
 
 

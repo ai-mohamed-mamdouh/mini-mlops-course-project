@@ -1,5 +1,4 @@
 from mini_mlopscourse_project.processors.iris.iris_processor import IrisProcessor
-from mini_mlopscourse_project.models.factory import ModelFactory
 from mini_mlopscourse_project.models.iris.model import IrisModel
 from mini_mlopscourse_project.schemas.iris.input_schema import InputSchema
 from mini_mlopscourse_project.schemas.iris.output_schema import OutputSchema
