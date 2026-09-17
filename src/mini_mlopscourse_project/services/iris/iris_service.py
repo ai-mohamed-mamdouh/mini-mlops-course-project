@@ -9,7 +9,7 @@ class IrisService :
         self.iris_model = iris_model
         self.iris_processor = iris_processor
 
-    def run_iris_service(self, input_data: InputSchema) -> OutputSchema : 
+    def run_iris_service(self, input_data: InputSchema) -> list[OutputSchema] : 
         features = self.iris_processor.pre_processing(input_data=input_data)
 
         logits = self.iris_model.predict(features)

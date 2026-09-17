@@ -1,5 +1,4 @@
 import asyncio
-
 from mini_mlopscourse_project.schemas.iris.input_schema import InputSchema
 
 
@@ -84,6 +83,8 @@ class BatchManager:
             batch_input = InputSchema(
                 features=batch_features
             )
+
+
             batch_input = self.processor.pre_processing( batch_input )
 
             # ONE model call
