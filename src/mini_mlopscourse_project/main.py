@@ -4,7 +4,7 @@ from contextlib import asynccontextmanager
 from mini_mlopscourse_project.api.iris.routes import iris_router
 from mini_mlopscourse_project.models.factory import ModelFactory
 from mini_mlopscourse_project.services.iris.iris_service import IrisService
-from mini_mlopscourse_project.api.iris.batch_manager import BatchManager
+from mini_mlopscourse_project.api.batch_manager import BatchManager
 from mini_mlopscourse_project.processors.iris.iris_processor import IrisProcessor
 
 @asynccontextmanager
