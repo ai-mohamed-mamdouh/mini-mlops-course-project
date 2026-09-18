@@ -1,6 +1,7 @@
 import asyncio
 from fastapi import FastAPI
 from contextlib import asynccontextmanager
+from mini_mlopscourse_project.core.logging import setup_logging
 from mini_mlopscourse_project.api.iris.routes import iris_router
 from mini_mlopscourse_project.models.factory import ModelFactory
 from mini_mlopscourse_project.services.iris.iris_service import IrisService
@@ -32,9 +33,9 @@ async def lifespan(app: FastAPI):
 
     # Cleanup if needed
     app.state.batch_manager = None
-    print("Shutdown...")
+    
 
-
+setup_logging()
 app = FastAPI(
     title="ML Inference API",
     lifespan=lifespan, 
