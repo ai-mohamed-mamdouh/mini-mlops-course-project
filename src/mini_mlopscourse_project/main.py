@@ -6,6 +6,8 @@ from mini_mlopscourse_project.models.factory import ModelFactory
 from mini_mlopscourse_project.services.iris.iris_service import IrisService
 from mini_mlopscourse_project.api.batch_manager import BatchManager
 from mini_mlopscourse_project.processors.iris.iris_processor import IrisProcessor
+from mini_mlopscourse_project.core.exceptions import PredictionError
+from mini_mlopscourse_project.api.error_handlers import prediction_error_handler
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -37,6 +39,11 @@ app = FastAPI(
     title="ML Inference API",
     lifespan=lifespan, 
     
+)
+
+app.add_exception_handler(
+    PredictionError,
+    prediction_error_handler
 )
 
 app.include_router(iris_router)
