@@ -1,8 +1,11 @@
 import numpy as np
-
 from mini_mlopscourse_project.config.settings import settings
 from mini_mlopscourse_project.schemas.iris.input_schema import InputSchema
 from mini_mlopscourse_project.schemas.iris.output_schema import OutputSchema
+from mini_mlopscourse_project.core.exceptions import(
+    PreprocessingError,
+    PostprocessingError
+    )
 
 
 class IrisProcessor:
@@ -20,16 +23,18 @@ class IrisProcessor:
         """
         Normalize Iris features using training statistics.
         """
-
-        features = np.array(
-            input_data.features,
-            dtype=np.float32
-        )
-
-        features = (features - self.mean) / self.std
-
-        return InputSchema(features=features)
-
+        try:
+            features = np.array(
+                input_data.features,
+                dtype=np.float32
+            )
+            features = (features - self.mean) / self.std
+            return InputSchema(features=features)
+        
+        except Exception as e:
+            raise PreprocessingError(
+                "Cannot make PreProcessing"
+            ) from e
 
     @staticmethod
     def post_processing(
@@ -38,34 +43,34 @@ class IrisProcessor:
         """
         Convert batch logits into individual responses.
         """
-
-        exp_x = np.exp(
-            logits - np.max(logits, axis=1, keepdims=True)
-        )
-
-        proba = exp_x / np.sum(
-            exp_x,
-            axis=1,
-            keepdims=True
-        )
-
-        preds = np.argmax(
-            proba,
-            axis=1
-        )
-
-
-        results = []
-
-        for pred, prob in zip(
-            preds,
-            proba
-        ):
-            results.append(
-                OutputSchema(
-                    preds=[int(pred)],
-                    proba=[prob.tolist()]
-                )
+        try: 
+            exp_x = np.exp(
+                logits - np.max(logits, axis=1, keepdims=True)
+            )
+            proba = exp_x / np.sum(
+                exp_x,
+                axis=1,
+                keepdims=True
+            )
+            preds = np.argmax(
+                proba,
+                axis=1
             )
 
-        return results
+            results = []
+            for pred, prob in zip(
+                preds,
+                proba
+            ):
+                results.append(
+                    OutputSchema(
+                        preds=[int(pred)],
+                        proba=[prob.tolist()]
+                    )
+                )
+            return results
+        
+        except Exception as e:
+            raise PostprocessingError(
+                "Cannot make PostProcessing"
+            ) from e
