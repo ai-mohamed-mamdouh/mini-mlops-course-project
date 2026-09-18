@@ -1,5 +1,6 @@
 import onnxruntime as ort
 from pathlib import Path
+from mini_mlopscourse_project.core.logging import get_logger 
 from mini_mlopscourse_project.core.logging import get_logger
 from mini_mlopscourse_project.core.exceptions import ( ModelLoadError )
 
@@ -19,6 +20,9 @@ def loader(path: Path):
         return session
 
     except Exception as e:
+        logger.exception(
+            'load model failed'
+        )
         raise ModelLoadError(
             "Cannot load model"
         ) from e
