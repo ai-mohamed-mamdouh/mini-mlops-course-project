@@ -7,7 +7,7 @@ from mini_mlopscourse_project.core.exceptions import(
 
 class PostprocessingStep(PipelineStep):
     @staticmethod
-    def post_processing(
+    def run(
         logits: np.ndarray
     ) -> list[OutputSchema]:
         """
