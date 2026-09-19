@@ -1,0 +1,54 @@
+.
+├── artifacts
+│   └── iris
+│       ├── iris.onnx
+│       ├── iris.onnx.data
+│       ├── mean.npy
+│       └── std.npy
+├── docker-compose.yml
+├── Dockerfile
+├── GIT_COMMIT_GUIDELINES.md
+├── locustfile.py
+├── pyproject.toml
+├── README.md
+├── src
+│   └── mini_mlopscourse_project
+│       ├── api
+│       │   ├── batch_manager.py
+│       │   ├── error_handlers.py
+│       │   └── iris
+│       │       ├── routes.py
+│       │       └── schemas.py
+│       ├── config
+│       │   └── settings.py
+│       ├── core
+│       │   ├── exceptions.py
+│       │   └── logging.py
+│       ├── main.py
+│       ├── models
+│       │   ├── base.py
+│       │   ├── factory.py
+│       │   └── iris
+│       │       ├── loader.py
+│       │       └── model.py
+│       ├── processors
+│       │   ├── base.py
+│       │   └── iris
+│       │       ├── model_processing.py
+│       │       ├── post_processing.py
+│       │       └── pre_processing.py
+│       ├── schemas
+│       │   └── iris
+│       │       ├── input_schema.py
+│       │       └── output_schema.py
+│       ├── services
+│       │   └── iris
+│       │       └── iris_service.py
+│       └── utils
+├── structure.txt
+├── tests
+│   ├── test_api.py
+│   ├── test_postprocessing.py
+│   ├── test_preprocessing.py
+│   └── test_service.py
+└── uv.lock

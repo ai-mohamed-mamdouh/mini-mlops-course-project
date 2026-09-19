@@ -1,6 +1,6 @@
 import asyncio
 from mini_mlopscourse_project.schemas.iris.input_schema import InputSchema
-from mini_mlopscourse_project.services.iris.iris_service import IrisPipeline
+from mini_mlopscourse_project.services.iris.inference_service import IrisPipeline
 
 
 class BatchManager:

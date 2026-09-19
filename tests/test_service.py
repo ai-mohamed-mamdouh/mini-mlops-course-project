@@ -1,4 +1,4 @@
-from mini_mlopscourse_project.services.iris.iris_service import IrisService
+from mini_mlopscourse_project.services.iris.inference_service import IrisService
 from mini_mlopscourse_project.models.factory import ModelFactory
 from mini_mlopscourse_project.processors.iris.iris_processor import IrisProcessor
 from mini_mlopscourse_project.schemas.iris.input_schema import InputSchema
