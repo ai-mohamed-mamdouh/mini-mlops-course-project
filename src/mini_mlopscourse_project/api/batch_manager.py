@@ -1,6 +1,6 @@
 import asyncio
 from mini_mlopscourse_project.schemas.iris.input_schema import InputSchema
-from mini_mlopscourse_project.services.iris.iris_service import IrisService
+from mini_mlopscourse_project.services.iris.iris_service import IrisPipeline
 
 
 class BatchManager:
@@ -13,7 +13,7 @@ class BatchManager:
 
     def __init__(
         self,
-        iris_service: IrisService,
+        iris_service: IrisPipeline,
         max_batch_size=10,
         timeout=0.01
     ):
@@ -102,7 +102,7 @@ class BatchManager:
             batch_input = InputSchema(
                 features=batch_features
             )
-            results = self.iris_service.run_iris_service(batch_input)
+            results = self.iris_service.run(batch_input)
 
             # return each result
             for future, result in zip(
