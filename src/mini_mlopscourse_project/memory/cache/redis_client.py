@@ -28,5 +28,8 @@ class RedisClient:
     def get(self, key):
         return self.client.get(key)
 
+    def exists(self, key):
+        return self.client.exists(key)
+
     def delete(self, key):
         return self.client.delete(key)

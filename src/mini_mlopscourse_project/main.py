@@ -26,6 +26,7 @@ async def lifespan(app: FastAPI):
         )
 
     batch_manager = BatchManager(iris_service=iris_service)
+
     app.state.batch_manager = batch_manager
 
     asyncio.create_task(

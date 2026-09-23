@@ -19,11 +19,5 @@ async def predict(
     result = await request.app.state.batch_manager.add_request(
         input_data
     )
-    
-    # output = IrisService(
-    #     iris_model=request.app.state.iris_model,
-    #     iris_processor=request.app.state.iris_processor
-    #     ).run_iris_service(input_data=input_data)
-
 
     return result
