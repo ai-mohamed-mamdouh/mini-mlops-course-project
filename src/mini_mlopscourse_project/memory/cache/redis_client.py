@@ -10,6 +10,7 @@ class RedisClient:
         self.client = redis.Redis(
             host=host,
             port=port,
+            db=1,
             decode_responses=True
         )
 
