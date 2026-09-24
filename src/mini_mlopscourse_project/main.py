@@ -12,6 +12,7 @@ from mini_mlopscourse_project.processors.iris.preprocessor import PreprocessingS
 from mini_mlopscourse_project.processors.iris.postprocessor import PostprocessingStep
 from mini_mlopscourse_project.processors.iris.prediction import ModelPredictionStep
 from mini_mlopscourse_project.memory.cache.redis_client import RedisClient
+from mini_mlopscourse_project.memory.cache.redis_service import RedisService
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -27,10 +28,10 @@ async def lifespan(app: FastAPI):
         )
 
     batch_manager = BatchManager(iris_service=iris_service)
-    redis_client = RedisClient( host='127.0.0.1', port=6379 )
+    redis_service = RedisService( RedisClient( host='127.0.0.1', port=6379 ) )
 
     app.state.batch_manager = batch_manager
-    app.state.redis_client = redis_client
+    app.state.redis_service = redis_service
 
     asyncio.create_task(
         batch_manager.process_batch()
@@ -42,7 +43,7 @@ async def lifespan(app: FastAPI):
     model = None
     iris_service = None
     app.state.batch_manager = None
-    app.state.redis_client = None
+    app.state.redis_service = None
     
 
 setup_logging()
